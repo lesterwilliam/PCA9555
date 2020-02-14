@@ -1,20 +1,23 @@
 #include <Wire.h>
-#include <AD5627.h>
+#include "PCA9555.h"
 
-#define ADDRESS 0x0C // I2C Address of the DAC
+#define ADDRESS_IO 0x21 // I2C Address of the DAC
 
-AD5627 DAC(ADDRESS, 3.3); // 3.3 is the reference voltage of the DAC
-
-int i;
+PCA9555 Expander(ADDRESS_IO, 2);
 
 void setup(){
   Wire.begin();
+  Serial.begin(9600);
+  Serial.println("Setup");
+
+  Expander.init();
 }
 
-// This loop generates a 3.3v saw-tooth wave on both outputs
 void loop(){
-  i++; 
-  DAC.writeA((float)i / 100.0);
-  DAC.writeB((float)i / 100.0);
-  if (i > 329) i = -1;
+  int pin = 14;
+  //Expander.toggle(pin);
+  Expander.setOutput(pin);
+  delay(1000);
+  Expander.clearOutput(pin);
+  delay(1000);
 }

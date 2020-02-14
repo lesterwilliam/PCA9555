@@ -59,3 +59,27 @@ void PCA9555::clearOutput(byte _pin){
   }
   Wire.endTransmission();
 }
+
+int PCA9555::readAll(){
+  int input0;
+  int input, input1;
+  Serial.print("\nRead input:\t");
+  
+  Wire.beginTransmission(_address);
+  Wire.write(OUTPUT_PORT_0_REG);
+  Wire.endTransmission();
+  
+  Wire.requestFrom(_address, 2);
+  
+  /*if(Wire.available() <= 2){
+    input = ((Wire.read()) << 8) | (Wire.read());
+  }*/
+  input0 = Wire.read();
+  input1 = Wire.read();
+
+  input = (input1 << 8) | input0;
+  Serial.println(input, HEX);
+  //Serial.println(input1, BIN);
+  return input0;
+}
+

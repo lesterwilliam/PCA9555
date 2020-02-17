@@ -2,4 +2,5 @@ PCA9555	KEYWORD1
 toggle	KEYWORD2
 setOutput	KEYWORD2
 clearOutput	KEYOWORD2
+readAll	KEYWORD2
 init	KEYWORD2

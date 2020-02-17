@@ -30,7 +30,7 @@ class PCA9555{
     void toggle(byte pin);
     void setOutput(byte pin);
     void clearOutput(byte pin);
-    int readAll();
+    short readAll();
 };
 
 #endif
